@@ -1,17 +1,13 @@
 import './App.css';
-import Toggle from './components/state/toggle';
-import YoutubeList from './components/Youtube/YoutubeList';
 import './name.scss';
-import Game from './components/tictactoe/Game'
-
+import Photos from "./components/photo/Photos"
 
 //parent component
 function App() {
-  
+ 
   return (
     <div>
-      <Game></Game>
-
+      <Photos></Photos>
 
     </div>
   )
