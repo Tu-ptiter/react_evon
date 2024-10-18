@@ -2,8 +2,8 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import './photo.scss';
 
-const getPhotos =()=>{
-    return axios.get('https://picsum.photos/v2/list')
+const getPhotos =(page)=>{
+    return axios.get(`https://picsum.photos/v2/list?page=${page}&limit=6`)
         .then((response) =>{
             return response.data;
         })
@@ -16,16 +16,22 @@ const getPhotos =()=>{
 
 const Photos = () => {
     const [randomPhoto, setRandomPhoto] = useState([]);
-    useEffect(()=>{
-        getPhotos().then((dates)=>{
-            console.log(dates);
-            setRandomPhoto(dates);
-        })
+    const [nextPage,setNextPage] =useState(1);
 
+    const handleLoadMore =()=>{
+        getPhotos(nextPage).then((dates)=>{
+            console.log(dates);
+            setRandomPhoto(dates);  
+            setNextPage(nextPage+1); 
+        })
+    }
+    useEffect(()=>{
+         handleLoadMore();
     },[]);
     return (
         <div>
-            {randomPhoto.map((item) =>(
+        <div className='grid '>
+            {randomPhoto.length > 0 && randomPhoto.map((item) =>(
                 <div className='container' >
                     <div>
                         <h1>{item.id}</h1>
@@ -39,6 +45,11 @@ const Photos = () => {
                 </div>
                 
             ))}
+            
+        </div>
+        <div>
+            <button onClick={handleLoadMore}>Load more</button>
+        </div>
         </div>
     );
 };

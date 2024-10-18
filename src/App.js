@@ -1,17 +1,20 @@
 import './App.css';
+import ExampleFunctional from './components/count/ExampleFunctional';
 import './name.scss';
-import Photos from "./components/photo/Photos"
+
 
 //parent component
 function App() {
  
   return (
     <div>
-      <Photos></Photos>
-
+      <ExampleFunctional></ExampleFunctional>
+      
     </div>
   )
 }
+
+
 
 
 
